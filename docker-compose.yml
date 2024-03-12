@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  nginx:
+    depends_on:
+        - backend
+        - frontend
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "80:80"
+    networks:
+      - api_network
+      - front_network
   frontend:
     build:
       context: ./frontend
