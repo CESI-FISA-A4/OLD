@@ -4,9 +4,10 @@ on:
   pull_request:
     branches: [main]
 
-jobs:
+jobs: 
   build-and-push:
     runs-on: ubuntu-latest
+    environment: prod-secrets
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
