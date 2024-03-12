@@ -27,6 +27,11 @@ module.exports = {
     },
 
     generateFakeProducts: async(req, res) => {
+        console.log("generateFakeProducts");
+        // return res.status(200).json({ "info": "Soon..." });
+        let data = await module.exports.generateData();
+        console.log(data);
+
         module.exports.generateData().then(fakeProducts => {
                 console.log(fakeProducts);
                 Product.insertMany(fakeProducts)
