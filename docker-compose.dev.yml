@@ -6,20 +6,28 @@ services:
         - backend
         - frontend
     restart: always
-    image: 4lexdel/elective-web-project:nginx
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
     ports:
       - "80:80"
     networks:
       - api_network
       - front_network
+    image: elective-nginx:1.0
   frontend:
-    image: 4lexdel/elective-web-project:frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
       - "4200:4200"
     networks:
       - front_network
+    image: elective-frontend:1.0
   backend:
-    image: 4lexdel/elective-web-project:backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     depends_on:
@@ -29,6 +37,7 @@ services:
     networks:
       - front_network
       - api_network
+    image: elective-backend:1.0
   database:
     image: mongo
     ports:
